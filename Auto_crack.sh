@@ -4,8 +4,6 @@ source .env
 cat /etc/os-release > check_Os
 source check_Os
 
-apt install realtek-rtl88xxau-dkms #USB C
-
 install (){
     if [[ "$ID_LIKE" == "debian" ]]
     then
@@ -19,10 +17,22 @@ install (){
         echo "what kind of f*uck*ng OS do you have ?"
     fi
 }
+choice_='Choose your Alfa: '
+foods=("Usb-B" "USB-C")
+select fav in "${alfa[@]}"; do
+    case $fav in
+        "Usb-B")
+            echo "So you have the $fav Alfa"
+            apt install 
+            ;;
+        "USB-C")
+            echo "So you have the $fav Alfa"
+            apt install realtek-rtl88xxau-dkms -y
+            ;;
 install
 
+iwconfig
 capture () {
-    ip a | grep "3: "
     ifconfig wlan0 down
     maccahanger wlan0 -r
     iwconfig wlan0 mode monitor
@@ -31,4 +41,4 @@ capture () {
     aireplay-ng --deauth 0 -a xx:xx:xx:xx:xx:xx wlan0mon
 }
 
-install capture
+capture
