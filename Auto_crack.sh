@@ -4,7 +4,7 @@ source .env
 cat /etc/os-release > check_Os
 source check_Os
 
-install (){
+install () {
     if [[ "$ID_LIKE" == "debian" ]]
     then
         apt update && apt upgrade -y
@@ -17,6 +17,8 @@ install (){
         echo "what kind of f*uck*ng OS do you have ?"
     fi
 }
+
+choose () {
 choice_='Choose your Alfa: '
 foods=("Usb-B" "USB-C")
 select fav in "${alfa[@]}"; do
@@ -29,9 +31,8 @@ select fav in "${alfa[@]}"; do
             echo "So you have the $fav Alfa"
             apt install realtek-rtl88xxau-dkms -y
             ;;
-install
+}
 
-iwconfig
 capture () {
     ifconfig wlan0 down
     maccahanger wlan0 -r
@@ -41,4 +42,4 @@ capture () {
     aireplay-ng --deauth 0 -a xx:xx:xx:xx:xx:xx wlan0mon
 }
 
-capture
+choose capture install
