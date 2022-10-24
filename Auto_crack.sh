@@ -4,7 +4,7 @@ source .env
 cat /etc/os-release > check_Os
 source check_Os
 
-install () {
+install (){
     if [[ "$ID_LIKE" == "debian" ]]
     then
         apt update && apt upgrade -y
@@ -18,19 +18,19 @@ install () {
     fi
 }
 
-choose () {
-choice_='Choose your Alfa: '
-foods=("Usb-B" "USB-C")
-select fav in "${alfa[@]}"; do
-    case $fav in
-        "Usb-B")
-            echo "So you have the $fav Alfa"
-            apt install 
-            ;;
-        "USB-C")
-            echo "So you have the $fav Alfa"
-            apt install realtek-rtl88xxau-dkms -y
-            ;;
+Choose_antenna () {
+    PS3='Choose your Alfa: '
+    foods=("Usb-B" "USB-C")
+    select fav in "${alfa[@]}"; do
+        case $fav in
+            "Usb-B")
+                echo "So you have the $fav Alfa"
+                apt install 
+                ;;
+            "USB-C")
+                echo "So you have the $fav Alfa"
+                apt install realtek-rtl88xxau-dkms -y
+                ;;
 }
 
 capture () {
@@ -43,4 +43,4 @@ capture () {
     aireplay-ng --deauth 0 -a xx:xx:xx:xx:xx:xx wlan0mon
 }
 
-choose capture install
+Choose_antenna install capture
