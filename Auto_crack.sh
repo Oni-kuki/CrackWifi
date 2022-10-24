@@ -31,4 +31,4 @@ capture () {
     aireplay-ng --deauth 0 -a xx:xx:xx:xx:xx:xx wlan0mon
 }
 
-capture
+install capture
