@@ -21,7 +21,7 @@ install (){
 }
 install
 
-iwconfig
+
 capture () {
     ip a | grep "3: "
     ifconfig wlan0 down
