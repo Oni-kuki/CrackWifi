@@ -23,6 +23,7 @@ install
 
 iwconfig
 capture () {
+    ip a | grep "3: "
     ifconfig wlan0 down
     maccahanger wlan0 -r
     iwconfig wlan0 mode monitor
