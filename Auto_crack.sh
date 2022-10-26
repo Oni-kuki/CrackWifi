@@ -35,6 +35,7 @@ Choose_antenna () {
                 else
                     echo "So you have the $fav Alfa"
                     pacman -S realtek-rtl88xxau-dkms -y
+                fi
                 ;;
 }
 
@@ -53,6 +54,7 @@ capture () {
 
         else 
             echo "Are you sure about the connection of your alfa card, so check the connexion or the drivers or the name of your wlan network"
+        fi
     }
 
 Choose_antenna install capture
