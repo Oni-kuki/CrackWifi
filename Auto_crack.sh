@@ -40,7 +40,7 @@ Choose_antenna () {
 
 capture () {
     iwconfig > netcard.txt
-        if [[ -s netcard.txt ]]
+        if [ -s netcard.txt ]
         then
             cut -d ' ' -f 1 netcard.txt | tr -d ' ' | sort | uniq > netcard1.txt | sed '1d' > netcard.txt
             ifconfig $(cat netcard.txt) down
