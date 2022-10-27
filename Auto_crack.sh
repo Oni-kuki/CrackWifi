@@ -5,11 +5,11 @@ cat /etc/os-release > check_Os
 source check_Os
 
 install (){
-    if [[ "$ID_LIKE" == "debian" ]]
+    if [[ "$ID_LIKE" == "debian" ]] | [[ "$ID" == "debian" ]]
     then
         apt update && apt upgrade -y
         apt install macchanger net-tools aircrack-ng -y
-    elif [[ "$ID_LIKE" == "arch" ]]
+    elif [[ "$ID_LIKE" == "arch" ]] | [[ "$ID" == "arch" ]]
     then
         pacman -Syu
         pacman -S macchanger net-tools aircrack-ng -y
@@ -19,12 +19,12 @@ install (){
 }
 
 Choose_antenna () {
-    PS3='Choose your Alfa: '
-    foods=("Usb-B" "USB-C")
-    select fav in "${alfa[@]}"; do
+PS3='Choose your Alfa: '
+alfa=("Usb-B" "USB-C" "Quit")
+select fav in "${alfa[@]}"; do
         case $fav in
             "Usb-B")
-                if [[ "$ID_LIKE" == "debian" ]]
+                if [[ "$ID_LIKE" == "debian" ]] | [[ "$ID" == "debian" ]]
                 then
                     echo "So you have the $fav Alfa"
                     apt install firmware-ath9k-htc -y
@@ -34,7 +34,7 @@ Choose_antenna () {
                 fi
                 ;;
             "USB-C")
-                if [[ "$ID_LIKE" == "debian" ]]
+                if [[ "$ID_LIKE" == "debian" ]] | [[ "$ID" == "debian" ]]
                 then
                     echo "So you have the $fav Alfa"
                     apt install realtek-rtl88xxau-dkms -y
@@ -42,7 +42,16 @@ Choose_antenna () {
                     echo "So you have the $fav Alfa"
                     pacman -S realtek-rtl88xxau-dkms -y
                 fi
+                break
                 ;;
+
+            "Quit")
+                echo "Passed to the Next"
+                exit
+                ;;
+             *) echo "What da fuck are you doing ? 1,2 or 3 my man, that's all ! $REPLY";;
+        esac
+done
 }
 
 capture () {
